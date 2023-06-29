@@ -1,8 +1,9 @@
 const express = require("express");
 const { Pool } = require("pg");
-
+const cors = require("cors");
 const app = express();
 
+app.use(cors());
 // PostgreSQL configuration
 require("dotenv").config({ path: "../.env" });
 
