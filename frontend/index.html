@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Web Application</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to My Web Application //created by James</h1>
+
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Capitals</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      // Fetch data from backend API and populate the table
+      fetch("http://localhost:3000/api/data")
+        .then((response) => response.json())
+        .then((data) => {
+          const tableBody = document.querySelector("#data-table tbody");
+          data.forEach((item) => {
+            const row = document.createElement("tr");
+            const countryCell = document.createElement("td");
+            const capitalCell = document.createElement("td");
+            countryCell.textContent = item.country;
+            capitalCell.textContent = item.capital;
+            row.appendChild(countryCell);
+            row.appendChild(capitalCell);
+            tableBody.appendChild(row);
+          });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    </script>
+  </body>
+</html>
